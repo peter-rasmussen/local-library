@@ -8307,19 +8307,44 @@ const authors = [
 //   console.log("books = "+books.length);
 //   console.log("authors = "+authors.length);
 
-function findAccountById(accounts, id) {
+function getBooksBorrowedCount(books) {
   // YOUR SOLUTION HERE
-  // Hint: You can use the [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method here. 
-  
-  // 
-  
-  return accounts.find((account) => account.id === id);
+  // Hint: You can use the [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method here. 
+  // If you get stuck, feel free to take a look at this repl.it: https://replit.com/@thinkful/getBooksBorrowedCount#index.js
+
+  /*  using 'filter' as that's a requirement of this assignment
+      much more elegant would be
+
+        let booksBorrowed=0;
+        books.forEach((book) => book.borrows.forEach((borrow) => {if (borrow.returned == false) booksBorrowed++}));
+        return booksBorrowed;
+  */
+
+
+    // let booksBorrowed=0;
+    // books.forEach((book) => {
+    //   borrows = book.borrows;
+    //   let borrowed=[];
+    //   borrowed = borrows.filter((borrow) => borrow.returned == false);
+    //   if (borrowed.length>0) booksBorrowed++;   
+    // });
+
+    let booksBorrowed=0;
+    books.forEach((book) => {
+      borrows = book.borrows;
+      //let borrowed=[];
+      //borrowed = borrows.filter((borrow) => borrow.returned == false);
+      if ((borrows.filter((borrow) => borrow.returned == false)).length>0) booksBorrowed++;
+      //if (borrowed.length>0) booksBorrowed++;   
+    });
+
+
+  return booksBorrowed;
+
 }
 
-const testId = "5f446f2ea0502bf8cbc7676a";
-console.log(accounts[testId])
-result = findAccountById(accounts,testId  );
-// should return allysa rhodes
-console.log(result);
+console.log("books borrowed "+ getBooksBorrowedCount(books));
+
+
 
 
